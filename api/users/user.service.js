@@ -3,16 +3,9 @@ const pool = require("../../config/database");
 module.exports = {
   create: (data, callback) => {
     pool.query(
-      `insert into registration(firstname, lastname, gender, email, password, number)
+      `insert into user_registration(firstname, lastname, email, username, password)
             values(?,?,?,?,?,?)`,
-      [
-        data.firstname,
-        data.lastname,
-        data.gender,
-        data.email,
-        data.password,
-        data.number,
-      ],
+      [data.firstname, data.lastname, data.email, data.username, data.password],
       (error, results, fields) => {
         if (error) {
           return callback(error);
@@ -23,7 +16,7 @@ module.exports = {
   },
   getUsers: (callback) => {
     pool.query(
-      `select id,firstname,lastname,gender,email,number from registration`,
+      `select username,id,firstname,lastname,email from registration`,
       [],
       (error, results, fields) => {
         if (error) {
@@ -35,7 +28,7 @@ module.exports = {
   },
   getUserById: (id, callback) => {
     pool.query(
-      `select id,firstname,lastname,gender,email,number from registration where id = ?`,
+      `select username,id,firstname,lastname,email from registration where id = ?`,
       [id],
       (error, results, fields) => {
         if (error) {
@@ -47,14 +40,13 @@ module.exports = {
   },
   updateUser: (data, callback) => {
     pool.query(
-      `update registration set firstname=?, lastname=?, gender=?, email=?, password=?, number=? where id = ?`,
+      `update registration set firstname=?, lastname=?, email=?, username=?, password=? where id = ?`,
       [
         data.firstname,
         data.lastname,
-        data.gender,
         data.email,
+        data.username,
         data.password,
-        data.number,
         data.id,
       ],
       (error, results, fields) => {

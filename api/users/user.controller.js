@@ -5,10 +5,8 @@ const {
   getUsers,
   updateUser,
   deleteUser,
-  getUserByEmail,
-} = require("./user.service"); //import services
+} = require("./user.service");
 const { genSaltSync, hashSync, compareSync } = require("bcrypt");
-const { sign } = require("jsonwebtoken");
 
 module.exports = {
   createUser: (req, res) => {
