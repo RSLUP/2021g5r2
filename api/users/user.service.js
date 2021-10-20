@@ -4,7 +4,7 @@ module.exports = {
   create: (data, callback) => {
     pool.query(
       `insert into user_registration(firstname, lastname, email, username, password)
-            values(?,?,?,?,?,?)`,
+            values(?,?,?,?,?)`,
       [data.firstname, data.lastname, data.email, data.username, data.password],
       (error, results, fields) => {
         if (error) {
@@ -16,7 +16,7 @@ module.exports = {
   },
   getUsers: (callback) => {
     pool.query(
-      `select username,id,firstname,lastname,email from registration`,
+      `select id,username,firstname,lastname,email from user_registration`,
       [],
       (error, results, fields) => {
         if (error) {
@@ -28,7 +28,7 @@ module.exports = {
   },
   getUserById: (id, callback) => {
     pool.query(
-      `select username,id,firstname,lastname,email from registration where id = ?`,
+      `select id,username,firstname,lastname,email from user_registration where id = ?`,
       [id],
       (error, results, fields) => {
         if (error) {
@@ -40,7 +40,7 @@ module.exports = {
   },
   updateUser: (data, callback) => {
     pool.query(
-      `update registration set firstname=?, lastname=?, email=?, username=?, password=? where id = ?`,
+      `update user_registration set firstname=?, lastname=?, email=?, username=?, password=? where id = ?`,
       [
         data.firstname,
         data.lastname,
@@ -59,7 +59,7 @@ module.exports = {
   },
   deleteUser: (data, callback) => {
     pool.query(
-      `delete from registration where id = ?`,
+      `delete from user_registration where id = ?`,
       [data.id],
       (error, results, fields) => {
         if (error) {
