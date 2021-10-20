@@ -28,7 +28,7 @@ module.exports = {
     });
   },
   getUserById: (req, res) => {
-    const id = req.params.id; //get id passed in the url
+    const id = req.params.id;
     getUserById(id, (err, results) => {
       if (err) {
         console.log(err);
@@ -59,9 +59,9 @@ module.exports = {
     });
   },
   updateUser: (req, res) => {
-    const body = req.body; //get the data from the body and store inside body variable
+    const body = req.body;
     const salt = genSaltSync(10);
-    body.password = hashSync(body.password, salt); //encrypt the given password
+    body.password = hashSync(body.password, salt);
     updateUser(body, (err, results) => {
       if (err) {
         console.log(err);
@@ -75,12 +75,12 @@ module.exports = {
       }
       return res.json({
         success: 1,
-        message: "Updated successfully", //send message to the user
+        message: "Updated successfully",
       });
     });
   },
   deleteUser: (req, res) => {
-    const data = req.body; //data.id will be deleted
+    const data = req.body;
     deleteUser(data, (err, results) => {
       if (err) {
         console.log(err);
@@ -94,7 +94,7 @@ module.exports = {
       }
       return res.json({
         success: 1,
-        message: "User deleted successfully", //send message to the user
+        message: "User deleted successfully",
       });
     });
   },
